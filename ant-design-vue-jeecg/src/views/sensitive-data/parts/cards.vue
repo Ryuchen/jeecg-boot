@@ -6,7 +6,6 @@
       :key="card.title"
     >
       <div class="card-header">
-        <div class="card-header-left">{{ card.title }}</div>
         <div class="card-header-right">{{ '0' + (i + 1) }}</div>
       </div>
       <dv-charts class="ring-charts" :option="card.ring" />
@@ -14,13 +13,13 @@
         <div class="card-footer-item">
           <div class="footer-title">风险1</div>
           <div class="footer-detail">
-            <ul>{{card.total.name}}</ul>
+            <dl>{{card.total.name}}</dl>
           </div>
         </div>
         <div class="card-footer-item">
           <div class="footer-title">风险2</div>
           <div class="footer-detail">
-            <ul>{{card.num.name}}</ul>
+            <dl>{{card.num.name}}</dl>
           </div>
         </div>
       </div>
@@ -39,16 +38,15 @@ export default {
   methods: {
     createData () {
       const { randomExtend } = this
-      var  strAry=["信用风险","合同纠纷","仓库质押","业务运营","贷款不足","政策风险"]
+      var  strAry=["价格波动风险","流动性风险","投机性风险","套期保值风险","交易履约风险","现金流风险","安全管理风险","技术风险","信息安全风险","信用风险","合同纠纷","仓库质押","业务运营","贷款不足","政策风险"]
       this.cards = new Array(5).fill(0).map((foo, i) => ({
         total: {
 
          name: strAry[i],
         },
         num: {
-          name: strAry[i+1],
+          name: strAry[i+5],
           content: '{nt}',
-          textAlign: 'right',
           style: {
             fill: '#26fcd8',
             fontWeight: 'bold'
@@ -131,25 +129,20 @@ export default {
     align-items: center;
     justify-content: space-between;
 
-    .card-header-left {
-      font-size: 18px;
-      font-weight: bold;
-      padding-left: 20px;
-    }
-
     .card-header-right {
       padding-right: 20px;
       font-size: 40px;
       color: #03d3ec;
+      margin-left: 15px;
     }
   }
 
   .ring-charts {
-    height: 55%;
+    height: 50%;
   }
 
   .card-footer {
-    height: 25%;
+    height: 30%;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -163,7 +156,7 @@ export default {
     .footer-title {
       display: flex;
       font-size: 15px;
-      margin-bottom: 5px;
+      margin: 5px;
     }
 
     .footer-detail {

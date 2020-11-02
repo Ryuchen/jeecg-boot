@@ -3,7 +3,7 @@
     <div class="region-title">
       <canvas id="graph-title" ref="graph-title" style="width: 100%; height: 24px;" ></canvas>
     </div>
-    <dv-capsule-chart :config="config" style="width:100%; height:300px;" />
+    <dv-capsule-chart :config="config" style="width:100%; height:450px;" />
   </div>
 </template>
 
@@ -19,27 +19,48 @@ export default {
       config: {
         data: [
           {
-            name: '交易商弃仓',
-            value: 55
+            name: '价格波动风险',
+            value: 133
           },
           {
-            name: '仓库管理不规范',
-            value: 120
+            name: '流动性风险',
+            value: 123
           },
           {
-            name: '贷款准备不足',
-            value: 78
+            name: '投机性风险',
+            value: 110
           },
           {
-            name: '供需不协调',
+            name: '套期保值风险',
+            value: 100
+          },
+          {
+            name: '交易履约风险',
+            value: 100
+          },
+          {
+            name: '现金流风险',
+            value: 98
+          },
+          {
+            name: '安全管理风险',
+            value: 75
+          },
+          {
+            name: '应用安全风险',
             value: 66
           },
           {
-            name: '合同纠纷',
-            value: 80
-          }
+            name: '技术风险',
+            value: 66
+          },
+          {
+            name: '信息安全风险',
+            value: 66
+          },
         ],
-        rowNum: 5
+        unit: '系数',
+        showValue: true
       }
     }
   },

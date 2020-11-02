@@ -44,7 +44,9 @@ export default {
               formatter: '{name} {percent}%',
               labelLineEndLength: 20,
               style: {
+                fontSize: 18,
                 color: ['#0000FF', '#00FFFF', '#FFFF00', '#FFE4C4', '#BA55D3', '#7FFF00',  '#b72700']
+
               },
               labelLineStyle: {
                 color: ['#0000FF', '#00FFFF', '#FFFF00', '#FFE4C4', '#BA55D3', '#7FFF00',  '#b72700']
