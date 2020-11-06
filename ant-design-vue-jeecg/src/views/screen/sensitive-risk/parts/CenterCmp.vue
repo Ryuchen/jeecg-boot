@@ -8,34 +8,19 @@
       <dv-charts :option="option3" />
       <dv-charts :option="option4" />
     </div>
-
-
   </div>
 </template>
 
 
 <script>
-  import { changeDefaultConfig } from '@jiaminghi/charts'
-
-  //changeDefaultConfig('color', ['#fff'])
- // @description 图表全局配色
-  //@type {Array}
-  //@default color = []
-
   export default {
-
     name: 'CenterCmp',
     data () {
       return {
 
         option1: {
-          grid:{           //坐标系大小
-            top:45,
-            bottom:35,
-
-          },
           title: {
-            text: '大豆价格波动趋势',
+            text: '大连商品交易所11月豆一价格实际走势与预测走势',
             style: {
               fill: '#ffffff',
               fontSize: 17,
@@ -44,26 +29,45 @@
               textBaseline: 'bottom'
             }
           },
+          legend: {
+            data: [{
+              name: '实际走势',
+            },
+              {
+                name: '预测走势',
+                color: '#ff9f7f'
+              }],
+            textUnselectedStyle: {
+              fontFamily: 'Arial',
+              fontSize: 13,
+              fill: '#a3a2a3'
+            },
+            textStyle: {
+              fontFamily: 'Arial',
+              fontSize: 15,
+              fill: '#fff'
+            }
+          },
           xAxis: {
-            name: '2019年',
-            nameGap:10,
+            name: '日期',
             nameTextStyle: {
               fill: '#ffffff',
-              fontSize: 10,
-
+              fontSize: 15
             },
-            data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月','八月', '九月', '十月', '十一月', '十二月'],
+            data: ['', '11.2', '', '', '11.5', '', '','','','11.10',
+              '','','','','11.15','','','','','11.20',
+              '','','','','11.25','','','','','11.30'],
             dataByText:
               {
                 fill: '#ffffff',
-                fontSize: 10
+                fontSize: 15
               },
             axisLine: //坐标轴线配置
               {
-              style: {
-                stroke: '#ffffff',
-                lineWidth: 1
-              }
+                style: {
+                  stroke: '#ffffff',
+                  lineWidth: 1
+                }
               },
             axisTick://坐标刻度配置
               {
@@ -76,27 +80,25 @@
               {
                 style: {
                   fill: '#ffffff',
-                  fontSize: 10,
+                  fontSize: 15,
                 }
               }
           },
           yAxis: {
-            name: '价格/元/斤',
-            nameGap:10,
-            nameTextStyle: {
-              fill: '#ffffff',
-              fontSize: 10,
-
-            },
+            name: '价格/元/100kg',
             data: 'value',
-            min:1, //坐标轴最小值
-            max:3,//坐标轴最大值
-            interval:0.5,//坐标轴数值间隔
+            min: 4800,
+            max: 5700,
+            interval:180,
             dataByText:
               {
                 fill: '#ffffff',
-                fontSize: 10
+                fontSize: 15
               },
+            nameTextStyle: {
+              fill: '#ffffff',
+              fontSize: 15,
+            },
             axisLine: //坐标轴线配置
               {
                 style: {
@@ -115,30 +117,51 @@
               {
                 style: {
                   fill: '#ffffff',
-                  fontSize: 10,
+                  fontSize: 15,
                 }
               }
-
           },
           series: [
             {
-              data: [1.75, 1.83, 1.78, 1.93, 1.86, 1.90, 1.88,2.02, 2.00, 1.96, 1.88, 1.91],
+              name: '实际走势',
+              data: [, 5173.83, 5141.67, 5171.33, 5235.67, ],
               type: 'line',
-              lineArea: {
+              stack: 'a',
+              fill: {
                 show: true
+              },
+              lineStyle:{
+                lineWidth: 3
+              }
+            },
+            {
+              name: '预测走势',
+              data: [,5100, 5130, 5150, 5190, 5220, 5220,
+                5220, 5250, 5230, 5260, 5280, 5300, 5300,
+                5300, 5250, 5240, 5260, 5300, 5280, 5280,
+                5280, 5300, 5340, 5280, 5260, 5270, 5270,
+                5270, 5290],
+              type: 'line',
+              stack: 'b',
+              fill: {
+                show: true
+              },
+              lineStyle: {
+                stroke: '#ff9f7f',
+                lineWidth: 3
+              },
+              linePoint: {
+                style: {
+                  stroke: '#ff9f7f'
+                }
               }
             }
           ]
         },
 
         option2: {
-          grid:{           //坐标系大小
-            top:45,
-            bottom:35,
-
-          },
           title: {
-            text: '大豆交易量波动趋势',
+            text: '大连商品交易所11月豆二价格实际走势与预测走势',
             style: {
               fill: '#ffffff',
               fontSize: 17,
@@ -147,19 +170,38 @@
               textBaseline: 'bottom'
             }
           },
+          legend: {
+            data: [{
+              name: '实际走势',
+            },
+              {
+                name: '预测走势',
+                color: '#ff9f7f'
+              }],
+            textUnselectedStyle: {
+              fontFamily: 'Arial',
+              fontSize: 13,
+              fill: '#a3a2a3'
+            },
+            textStyle: {
+              fontFamily: 'Arial',
+              fontSize: 15,
+              fill: '#fff'
+            }
+          },
           xAxis: {
-            name: '2019年',
-            nameGap:10,
+            name: '日期',
             nameTextStyle: {
               fill: '#ffffff',
-              fontSize: 10,
-
+              fontSize: 15
             },
-            data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月','八月', '九月', '十月', '十一月', '十二月'],
+            data: ['', '11.2', '', '', '11.5', '', '','','','11.10',
+              '','','','','11.15','','','','','11.20',
+              '','','','','11.25','','','','','11.30'],
             dataByText:
               {
                 fill: '#ffffff',
-                fontSize: 10
+                fontSize: 15
               },
             axisLine: //坐标轴线配置
               {
@@ -179,27 +221,25 @@
               {
                 style: {
                   fill: '#ffffff',
-                  fontSize: 10,
+                  fontSize: 15,
                 }
               }
           },
           yAxis: {
-            name: '重量/万吨',
-            nameGap:10,
-            nameTextStyle: {
-              fill: '#ffffff',
-              fontSize: 10,
-
-            },
+            name: '价格/元/100kg',
             data: 'value',
-            min:500, //坐标轴最小值
-            max:1500,//坐标轴最大值
-            interval:100,//坐标轴数值间隔
+            min: 3400,
+            max: 4000,
+            interval:120,
             dataByText:
               {
                 fill: '#ffffff',
-                fontSize: 10
+                fontSize: 15
               },
+            nameTextStyle: {
+              fill: '#ffffff',
+              fontSize: 15,
+            },
             axisLine: //坐标轴线配置
               {
                 style: {
@@ -218,133 +258,47 @@
               {
                 style: {
                   fill: '#ffffff',
-                  fontSize: 10,
+                  fontSize: 15,
                 }
               }
-
           },
           series: [
             {
-              data: [750, 830, 790, 820, 850, 930, 970,880, 810, 790, 880, 920],
+              name: '实际走势',
+              data: [, 3689.89, 3673.5, 3702.3, 3782, ],
               type: 'line',
-              lineArea: {
+              stack: 'a',
+              fill: {
                 show: true
+              },
+            },
+            {
+              name: '预测走势',
+              data: [,3700, 3720, 3730, 3750, 3770, 3770,
+                3770, 3750, 3730, 3740, 3760, 3740, 3740,
+                3740, 3750, 3780, 3760, 3770, 3730, 3730,
+                3730, 3740, 3760, 3780, 3800, 3790, 3790,
+                3790, 3780],
+              type: 'line',
+              stack: 'b',
+              fill: {
+                show: true
+              },
+              lineStyle: {
+                stroke: '#ff9f7f',
+              },
+              linePoint: {
+                style: {
+                  stroke: '#ff9f7f'
+                }
               }
             }
           ]
         },
 
         option3: {
-            grid:{           //坐标系大小
-              top:40,
-              bottom:42,
-
-            },
-            title: {
-              text: '大豆交易额波动趋势',
-              style: {
-                fill: '#ffffff',
-                fontSize: 17,
-                fontWeight: 'bold',
-                textAlign: 'center',
-                textBaseline: 'bottom'
-              }
-            },
-            xAxis: {
-              name: '2019年',
-              nameGap:10,
-              nameTextStyle: {
-                fill: '#ffffff',
-                fontSize: 10,
-
-              },
-              data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月','八月', '九月', '十月', '十一月', '十二月'],
-              dataByText:
-                {
-                  fill: '#ffffff',
-                  fontSize: 10
-                },
-              axisLine: //坐标轴线配置
-                {
-                  style: {
-                    stroke: '#ffffff',
-                    lineWidth: 1
-                  }
-                },
-              axisTick://坐标刻度配置
-                {
-                  style: {
-                    stroke: '#ffffff',
-                    lineWidth: 1
-                  }
-                },
-              axisLabel://坐标轴标签配置
-                {
-                  style: {
-                    fill: '#ffffff',
-                    fontSize: 10,
-                  }
-                }
-            },
-            yAxis: {
-              name: '交易额/亿元',
-              nameGap:10,
-              nameTextStyle: {
-                fill: '#ffffff',
-                fontSize: 10,
-
-              },
-              data: 'value',
-              min:100, //坐标轴最小值
-              max:500,//坐标轴最大值
-              interval:100,//坐标轴数值间隔
-              dataByText:
-                {
-                  fill: '#ffffff',
-                  fontSize: 10
-                },
-              axisLine: //坐标轴线配置
-                {
-                  style: {
-                    stroke: '#ffffff',
-                    lineWidth: 1
-                  }
-                },
-              axisTick://坐标刻度配置
-                {
-                  style: {
-                    stroke: '#ffffff',
-                    lineWidth: 1
-                  }
-                },
-              axisLabel://坐标轴标签配置
-                {
-                  style: {
-                    fill: '#ffffff',
-                    fontSize: 10,
-                  }
-                }
-
-            },
-            series: [
-              {
-                data: [240, 200, 260, 300, 450, 330, 290,190, 440, 300, 220, 250],
-                type: 'line',
-                lineArea: {
-                  show: true
-                }
-              }
-            ]
-          },
-
-        option4: {
-          grid:{           //坐标系大小
-            top:40,
-            bottom:42,
-
-          },
           title: {
-            text: '大豆进口数量波动趋势',
+            text: '大连商品交易所11月豆粕价格实际走势与预测走势',
             style: {
               fill: '#ffffff',
               fontSize: 17,
@@ -353,19 +307,38 @@
               textBaseline: 'bottom'
             }
           },
+          legend: {
+            data: [{
+              name: '实际走势',
+            },
+              {
+                name: '预测走势',
+                color: '#ff9f7f'
+              }],
+            textUnselectedStyle: {
+              fontFamily: 'Arial',
+              fontSize: 13,
+              fill: '#a3a2a3'
+            },
+            textStyle: {
+              fontFamily: 'Arial',
+              fontSize: 15,
+              fill: '#fff'
+            }
+          },
           xAxis: {
-            name: '2019年',
-            nameGap:10,
+            name: '日期',
             nameTextStyle: {
               fill: '#ffffff',
-              fontSize: 10,
-
+              fontSize: 15
             },
-            data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月','八月', '九月', '十月', '十一月', '十二月'],
+            data: ['', '11.2', '', '', '11.5', '', '','','','11.10',
+              '','','','','11.15','','','','','11.20',
+              '','','','','11.25','','','','','11.30'],
             dataByText:
               {
                 fill: '#ffffff',
-                fontSize: 10
+                fontSize: 15
               },
             axisLine: //坐标轴线配置
               {
@@ -385,26 +358,124 @@
               {
                 style: {
                   fill: '#ffffff',
-                  fontSize: 10,
+                  fontSize: 15,
                 }
               }
           },
           yAxis: {
-            name: '数量/万吨',
-            nameGap:10,
-            nameTextStyle: {
-              fill: '#ffffff',
-              fontSize: 10,
-
-            },
+            name: '价格/元/100kg',
             data: 'value',
-            min:500, //坐标轴最小值
-            max:1300,//坐标轴最大值
-            interval:100,//坐标轴数值间隔
+            min: 2800,
+            max: 3500,
+            interval:140,
             dataByText:
               {
                 fill: '#ffffff',
-                fontSize: 10
+                fontSize: 15
+              },
+            nameTextStyle: {
+              fill: '#ffffff',
+              fontSize: 15,
+            },
+            axisLine: //坐标轴线配置
+              {
+                style: {
+                  stroke: '#ffffff',
+                  lineWidth: 1
+                }
+              },
+            axisTick://坐标刻度配置
+              {
+                style: {
+                  stroke: '#ffffff',
+                  lineWidth: 1
+                }
+              },
+            axisLabel://坐标轴标签配置
+              {
+                style: {
+                  fill: '#ffffff',
+                  fontSize: 15,
+                }
+              }
+          },
+          series: [
+            {
+              name: '实际走势',
+              data: [, 3119.38, 3120.5, 3140.25, 3212.63, ],
+              type: 'line',
+              stack: 'a',
+              fill: {
+                show: true
+              },
+            },
+            {
+              name: '预测走势',
+              data: [,3100, 3130, 3150, 3170, 3190, 3190,
+                3190, 3200, 3210, 3200, 3180, 3190, 3190,
+                3190, 3170, 3180, 3160, 3170, 3160, 3160,
+                3160, 3150, 3170, 3180, 3200, 3210, 3210,
+                3210, 3200],
+              type: 'line',
+              stack: 'b',
+              fill: {
+                show: true
+              },
+              lineStyle: {
+                stroke: '#ff9f7f',
+              },
+              linePoint: {
+                style: {
+                  stroke: '#ff9f7f'
+                }
+              }
+            }
+          ]
+        },
+
+        option4: {
+          title: {
+            text: '大连商品交易所11月豆油价格实际走势与预测走势',
+            style: {
+              fill: '#ffffff',
+              fontSize: 17,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              textBaseline: 'bottom'
+            }
+          },
+          legend: {
+            data: [{
+              name: '实际走势',
+              },
+              {
+                name: '预测走势',
+                color: '#ff9f7f'
+              }],
+            textUnselectedStyle: {
+              fontFamily: 'Arial',
+              fontSize: 13,
+              fill: '#a3a2a3'
+            },
+            textStyle: {
+              fontFamily: 'Arial',
+              fontSize: 15,
+              fill: '#fff'
+            }
+          },
+          xAxis: {
+            name: '日期',
+            nameTextStyle: {
+              fill: '#ffffff',
+              fontSize: 15
+            },
+            data: ['', '11.2', '', '', '11.5', '', '','','','11.10',
+              '','','','','11.15','','','','','11.20',
+              '','','','','11.25','','','','','11.30'],
+            dataByText:
+              {
+                fill: '#ffffff',
+                fontSize: 15
               },
             axisLine: //坐标轴线配置
               {
@@ -424,17 +495,76 @@
               {
                 style: {
                   fill: '#ffffff',
-                  fontSize: 10,
+                  fontSize: 15,
                 }
               }
-
+          },
+          yAxis: {
+            name: '价格/元/100kg',
+            data: 'value',
+            min: 6800,
+            max: 7400,
+            interval:120,
+            dataByText:
+              {
+                fill: '#ffffff',
+                fontSize: 15
+              },
+            nameTextStyle: {
+              fill: '#ffffff',
+              fontSize: 15,
+            },
+            axisLine: //坐标轴线配置
+              {
+                style: {
+                  stroke: '#ffffff',
+                  lineWidth: 1
+                }
+              },
+            axisTick://坐标刻度配置
+              {
+                style: {
+                  stroke: '#ffffff',
+                  lineWidth: 1
+                }
+              },
+            axisLabel://坐标轴标签配置
+              {
+                style: {
+                  fill: '#ffffff',
+                  fontSize: 15,
+                }
+              }
           },
           series: [
             {
-              data: [660, 690, 730, 820, 770, 790, 895,900, 770, 710, 920, 880],
+              name: '实际走势',
+              data: [, 7010, 7036.86, 7179.5, 7148.57, ],
               type: 'line',
-              lineArea: {
+              stack: 'a',
+              fill: {
                 show: true
+              }
+            },
+            {
+              name: '预测走势',
+              data: [,7100, 7130, 7150, 7190, 7220, 7220,
+                7220, 7200, 7180, 7190, 7170, 7180, 7180,
+                7180, 7190, 7160, 7140, 7170, 7130, 7130,
+                7130, 7150, 7180, 7210, 7220, 7210, 7210,
+                7210, 7200],
+              type: 'line',
+              stack: 'b',
+              fill: {
+                show: true
+              },
+              lineStyle: {
+                stroke: '#ff9f7f',
+              },
+              linePoint: {
+                style: {
+                  stroke: '#ff9f7f'
+                }
               }
             }
           ]
@@ -442,106 +572,25 @@
       }
     }
   }
-
-
 </script>
 
 <style lang="less">
 .center-cmp {
   width: 100%;
   height: 100%;
-  margin: 0px;
-  padding: 0px;
-  display: flex;
+  margin: 0;
+  padding: 8px;
+  display: block;
   flex-direction: column;
 
-  /*background-image: url('./bg.png');
-  background-size: 100% 100%;
-  background-position-y:10px;
-  filter:opacity(65%);*/
-
-
   .cc-top {
-    //stroke: #990000;
     height: 50%;
     display: flex;
-    font-size: 50px;
   }
 
   .cc-button {
     height: 50%;
     display: flex;
-    font-size: 50px;
-    /*.card {
-      background-color: rgba(4,49,128,.6);
-      color: #08e5ff;
-      height: 70px;
-      width: 70px;
-      font-size: 45px;
-      font-weight: bold;
-      line-height: 70px;
-      text-align: center;
-      margin: 10px;
-    }*/
-  }
-
-  .cc-main-container {
-    position: relative;
-    flex: 1;
-    display: flex;
-
-    .ccmc-middle {
-      width: 50%;
-      height: 90%;
-
-      .active-ring-name {
-        font-size: 20px !important;
-      }
-    }
-
-    .ccmc-left, .ccmc-right {
-      width: 25%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      font-size: 24px;
-
-      span {
-        font-size: 40px;
-        font-weight: bold;
-      }
-
-      .station-info {
-        height: 80px;
-        display: flex;
-        align-items: center;
-      }
-    }
-
-    .ccmc-left {
-      align-items: flex-end;
-
-      span {
-        margin-left: 20px;
-      }
-    }
-
-    .ccmc-right {
-      align-items: flex-start;
-
-      span {
-        margin-right: 20px;
-      }
-    }
-  }
-
-  .label-tag {
-    position: absolute;
-    width: 500px;
-    height: 30px;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
   }
 }
 </style>

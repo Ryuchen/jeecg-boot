@@ -25,10 +25,10 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  top: -24px;
   height: 60px;
-  top: 2.75rem;
-  width: 100%;
-  padding: 0 18%;
+  width: calc(100% - 20px);
+  padding: 0 20%;
 
   .ant-btn-link {
     color: white;

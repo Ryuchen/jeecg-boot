@@ -1,94 +1,160 @@
 <template>
-  <div id="scroll-board">
-    <dv-scroll-board :config="config" />
+  <div class="risk-bottom-chart">
+    <dv-border-box-13>
+      <v-chart :force-fit="true" height="280" :padding="padding" :data="data" :scale="scale" style="stroke: #fff">
+        <v-tooltip />
+        <v-legend :custom="true" :clickable="false" :items="legendItems"/>
+        <v-view v-for="(item, i) in data" :key="i" :start="getStart(i)" :end="getEnd(i)" :data="[item]" :scale="getScale(item, i)">
+          <v-coord type="rect" direction='LB'/>
+          <v-axis dataKey="target" :show="false"/>
+          <v-axis dataKey="actual" position="right"/>
+          <v-point position="title*target" color="#square" shape="line" :size="12" :v-style="style1"/>
+          <v-interval position="title*actual" color="#223273" :size="15"/>
+          <v-guide type="region" :start="getGuide(item, 0, 'start')" :end="getGuide(item, 0, 'end')"
+                   :v-style="style2"/>
+          <v-guide type="region" :start="getGuide(item, 1, 'start')" :end="getGuide(item, 1, 'end')"
+                   :v-style="style3"/>
+          <v-guide type="region" :start="getGuide(item, 2, 'start')" :end="getGuide(item, 2, 'end')"
+                   :v-style="style4"/>
+          <v-guide type="region" :start="getGuide(item, 3, 'start')" :end="getGuide(item, 3, 'end')"
+                   :v-style="style5"/>
+          <v-guide type="region" :start="getGuide(item, 4, 'start')" :end="getGuide(item, 4, 'end')"
+                   :v-style="style6"/>
+        </v-view>
+      </v-chart>
+    </dv-border-box-13>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'BottomCharts',
-    data () {
-      return {
-        config: {
-          header: ['时间', '平台', '风险类型', '等级'],
-          data: [
-            ['2019-07-01 19:25:00', '交易所A','价格波动风险', '<div class="risk-rate lower">1</div>'],
-            ['2019-07-02 17:25:00', '交易所B','合同履约风险',  '<div class="risk-rate low">2</div>'],
-            ['2019-07-03 16:25:00', '交易所C','价格波动风险', '<div class="risk-rate middle">3</div>'],
-            ['2019-07-04 15:25:00', '交易所F','价格波动风险',  '<div class="risk-rate higher">5</div>'],
-            ['2019-07-05 14:25:00', '交易所E','仓单质押风险',  '<div class="risk-rate middle">3</div>'],
-            ['2019-07-06 13:25:00', '交易所F','价格波动风险',  '<div class="risk-rate lower">1</div>'],
-            ['2019-07-07 12:25:00', '交易所A','价格波动风险',  '<div class="risk-rate high">4</div>'],
-            ['2019-07-08 11:25:00', '交易所C','合同履约风险',  '<div class="risk-rate middle">3</div>'],
-            ['2019-07-09 10:25:00', '交易所B','合同履约风险',  '<div class="risk-rate middle">3</div>'],
-            ['2019-07-10 09:25:00', '交易所D','仓单质押风险',  '<div class="risk-rate low">1</div>']
-          ],
-          columnWidth: [200, 150, 150,150],
-          align: ['center', 'left', 'right', 'right'],
-          waitTime: 4000,
-          rowNum: 5,
-          headerBGC: '#1981f6',
-          oddRowBGC: 'rgba(0, 44, 81, 0.8)',
-          evenRowBGC: 'rgba(10, 29, 50, 0.8)'
-        }
-      }
+const data = [
+  {"title":"价格波动风险", "ranges": [1, 2, 3, 4, 5, 5], "actual": 2.5, "target": 3.5},
+  {"title":"流通性风险", "ranges": [1, 2, 3, 4, 5, 5], "actual": 1, "target": 4.0},
+  {"title":"投机性风险", "ranges": [1, 2, 3, 4, 5, 5], "actual": 1.2, "target": 3.8},
+  {"title":"套期保值风险", "ranges": [1, 2, 3, 4, 5, 5], "actual": 0.5, "target": 4.5},
+  {"title":"交易履约风险", "ranges": [1, 2, 3, 4, 5, 5], "actual": 1.5, "target": 3.0}
+];
+
+const scale = [{
+  dataKey: 'population',
+  tickInterval: 5,
+}];
+
+const legendItems = [
+  {
+    value: '正常',
+    marker: {symbol: 'square', fill: '#B3E8A7', radius: 5}
+  },
+  {
+    value: '低风险',
+    marker: {symbol: 'square', fill: '#A7E8B4', radius: 5}
+  },
+  {
+    value: '中风险',
+    marker: {symbol: 'square', fill: '#FFD591', radius: 5}
+  },
+  {
+    value: '高风险',
+    marker: {symbol: 'square', fill: '#F18F62', radius: 5}
+  },
+  {
+    value: '应急响应',
+    marker: {symbol: 'square', fill: '#F84E4E', radius: 5}
+  },
+  {
+    value: '实际值',
+    marker: {symbol: 'square', fill: '#223273', radius: 5}
+  },
+  {
+    value: '告警值',
+    marker: {
+      symbol: 'line',
+      stroke: '#d70000',
+      radius: 5
     }
+  },
+];
+
+let y = 0;
+const yGap = 0.1;
+
+export default {
+  name: 'riskBottomChart',
+  methods: {
+    getStart(i) {
+      const { y, yGap } = this;
+      return {x:0, y: y + i * yGap + i * 0.125};
+    },
+    getEnd(i) {
+      const { y, yGap } = this;
+      return {x: 1, y: y + (i+1) * yGap + i * 0.125};
+    },
+    getScale (item, i) {
+      const ranges = item.ranges;
+      return [{
+        dataKey: 'actual',
+        min: 0,
+        max: ranges[5],
+        nice: false
+      }, {
+        dataKey: 'target',
+        min: 0,
+        max: ranges[5],
+        nice: false
+      }];
+    },
+    getGuide(viewData, guideIndex, position) {
+      const ranges = viewData.ranges;
+      const guide = [
+        {start: [-1, 0], end:[1, ranges[0]]},
+        {start: [-1, ranges[0]], end: [1, ranges[1]]},
+        {start: [-1, ranges[1]], end: [1, ranges[2]]},
+        {start: [-1, ranges[2]], end: [1, ranges[3]]},
+        {start: [-1, ranges[3]], end: [1, ranges[4]]}
+      ];
+      return guide[guideIndex][position];
+    },
+  },
+  data() {
+    return {
+      data,
+      padding:[40, 80, 40, 160],
+      style1:{
+        lineWidth: 2
+      },
+      style2:{
+        fill: '#B3E8A7',
+        fillOpacity: 0.85
+      },
+      style3:{
+        fill: '#A7E8B4',
+        fillOpacity: 0.85
+      },
+      style4:{
+        fill: '#FFD591',
+        fillOpacity: 0.85
+      },
+      style5:{
+        fill: '#F18F62',
+        fillOpacity: 0.85
+      },
+      style6:{
+        fill: '#F84E4E',
+        fillOpacity: 0.85
+      },
+      scale,
+      legendItems,
+      y,
+      yGap,
+    };
   }
+};
 </script>
 
 <style lang="less">
-  #scroll-board {
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-
-    .header {
-      height: auto;
-    }
-
-    .ceil {
-      color: #fff;
-      font-weight: 400;
-
-      .risk-rate {
-        display: inline-block;
-        vertical-align: middle;
-        white-space: nowrap;
-        text-align: center;
-        border-radius: 10px;
-        box-shadow: 0 0 0 1px #ccc;
-        padding: 2px 6px;
-        margin: 0 8px 4px 8px;
-        font-size: 10px;
-        font-weight: 600;
-        line-height: 12px;
-      }
-      .higher {
-        color: #000000;
-        background: #f5222d;
-      }
-
-      .high {
-        color: #000000;
-        background: #ff751e;
-      }
-
-      .middle {
-        color: #000000;
-        background: #f8ed28;
-      }
-
-      .low {
-        color: #000000;
-        background: #dbf947;
-      }
-
-      .lower {
-        color: #000000;
-        background: #bdff01;
-      }
-    }
-  }
+.risk-bottom-chart {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+}
 </style>
-

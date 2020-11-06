@@ -1,9 +1,9 @@
 <template>
   <div class="left-chart-3">
     <div class="lc3-header">
-      <canvas id="graph-title" ref="graph-title" style="width: 100%; height: 24px;" ></canvas>
+      <canvas id="graph-title" ref="graph-title" style="width: 100%; height: 30px;" ></canvas>
     </div>
-    <dv-capsule-chart class="lc3-chart" :config="config" style="width:100%; height:300px;" />
+      <dv-water-level-pond :config="config" style="width:70%;height:215px;margin-left: 15%;margin-top: 3%"/>
   </div>
 </template>
 
@@ -17,29 +17,11 @@ export default {
   data () {
     return {
       config: {
-        data: [
-          {
-            name: '价格波动风险',
-            value: 78
-          },
-          {
-            name: '流动性风险',
-            value: 54
-          },
-          {
-            name: '投机性风险',
-            value: 123
-          },
-          {
-            name: '套期保值风险',
-            value: 167
-          },
-          {
-            name: '交易履约风险',
-            value: 77
-          }
-        ],
-        colors: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b'],
+        data: [65,44,56,79,50],
+        shape: 'roundRect',
+        formatter:'{value}%',
+        waveHeight:20,
+        colors: ['#DD4A68','#a89722','#9ce5f4','#3de7c9','#469f4b'],
       }
     }
   },
@@ -56,7 +38,7 @@ export default {
       const {
         area: [w, h],
       } = render;
-      const centerPoint = [w / 2, h / 2];
+      const centerPoint = [w / 2, h/2];
       const graphTitle = {
         name: 'text',
         animationCurve: 'easeOutBounce',
@@ -68,7 +50,7 @@ export default {
         },
         style: {
           fill: '#9ce5f4',
-          fontSize: 18,
+          fontSize: 26,
           shadowBlur: 0,
           shadowColor: '#66eece',
           hoverCursor: 'pointer',
@@ -88,13 +70,10 @@ export default {
   height: 33%;
   display: flex;
   flex-direction: column;
+  margin-top: 3%;
 
   .lc3-header {
-    margin-top: 10px;
-  }
-
-  .lc3-chart {
-    flex: 1;
+    margin-top: 15px;
   }
 }
 </style>

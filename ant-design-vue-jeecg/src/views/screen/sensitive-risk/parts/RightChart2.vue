@@ -5,7 +5,7 @@
     </div>
     <div class="rc1-chart-container">
       <div class="left">
-        <div class="left-header">历史风险总数</div>
+        <div class="left-header">整体风险系数</div>
         <div class="number">267</div>
       </div>
       <dv-charts class="right" :option="option" style="width:350px;" />
@@ -70,7 +70,7 @@ export default {
         hover: true,
         drag: true,
         shape: {
-          content: '交易商风险占比',
+          content: '各风险占比',
           position: centerPoint,
         },
         style: {

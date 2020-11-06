@@ -1,18 +1,34 @@
 <template>
-  <div class="chart1">
+  <div class="chart3">
     <dv-charts :option="option" />
   </div>
 </template>
 
 <script>
   import Charts from '@jiaminghi/charts'
+  function random(max,min){
+    return Math.round(Math.random()*(max-min)+min);
+  }
+  function randomArray(min){
+    var str = [];
+    for(var i=0;i<10;i++){
+      str[i]=random(min+10,min)
+    }
+    for(var i=10;i<20;i++){
+      str[i]=random(min+20,min+10)
+    }
+    for(var i=20;i<31;i++){
+      str[i]=random(min+30,min+20)
+    }
+    return str;
+  }
   export default {
-    name: 'chart1',
+    name: 'chart3',
     data(){
       return{
         option : {
           title: {
-            text: '各产业交易商数量',
+            text: '当月大宗商品交易量走势',
             style: {
               fill: '#ffffff',
               fontSize: 17,
@@ -22,7 +38,7 @@
             }
           },
           legend: {
-            data: ['农林牧渔', '能源化工','金属矿产','稀贵金属'],
+            data: ['农林牧渔', '能源化工', '金属矿产', '稀贵金属', '文化艺术品'],
             textUnselectedStyle: {
               fontFamily: 'Arial',
               fontSize: 13,
@@ -35,12 +51,14 @@
             }
           },
           xAxis: {
-            name: '月份',
+            name: '日期',
             nameTextStyle: {
               fill: '#ffffff',
               fontSize: 15
             },
-            data: ['一月', '二月', '三月', '四月', '五月', '六月'],
+            data: ['1', '', '', '', '5', '', '','','','10',
+                   '','','','','15','','','','','20',
+                   '','','','','25','','','','','','31'],
             dataByText:
               {
                 fill: '#ffffff',
@@ -69,17 +87,17 @@
               }
           },
           yAxis: {
-            name: '数量/个',
+            name: '交易量/100kg',
             data: 'value',
-            nameTextStyle: {
-              fill: '#ffffff',
-              fontSize: 15,
-            },
             dataByText:
               {
                 fill: '#ffffff',
                 fontSize: 15
               },
+            nameTextStyle: {
+              fill: '#ffffff',
+              fontSize: 15,
+            },
             axisLine: //坐标轴线配置
               {
                 style: {
@@ -105,27 +123,48 @@
           series: [
             {
               name: '农林牧渔',
-              data: [110, 120, 100, 125, 130, 140],
-              type: 'bar',
-              shapeType: 'normal'
+              data: randomArray(120),
+              type: 'line',
+              stack: 'a',
+              fill: {
+                show: true
+              }
             },
             {
               name: '能源化工',
-              data: [90, 100, 95, 110, 105, 105],
-              type: 'bar',
-              shapeType: 'normal'
+              data: randomArray(100),
+              type: 'line',
+              stack: 'b',
+              fill: {
+                show: true
+              }
             },
             {
               name: '金属矿产',
-              data: [90, 80, 85, 85, 88, 83],
-              type: 'bar',
-              shapeType: 'normal'
+              data: randomArray(90),
+              type: 'line',
+              stack: 'c',
+              fill: {
+                show: true
+              }
             },
             {
               name: '稀贵金属',
-              data: [70, 75, 80, 80, 75, 70],
-              type: 'bar',
-              shapeType: 'normal'
+              data: randomArray(90),
+              type: 'line',
+              stack: 'd',
+              fill: {
+                show: true
+              }
+            },
+            {
+              name: '文化艺术品',
+              data: randomArray(70),
+              type: 'line',
+              stack: 'e',
+              fill: {
+                show: true
+              }
             }
           ]
         }
@@ -135,7 +174,7 @@
 </script>
 
 <style lang="less">
-  .chart1{
+  .chart3{
     width: 100%;
     height: 100%;
   }
